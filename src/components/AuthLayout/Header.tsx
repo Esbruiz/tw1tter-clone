@@ -39,7 +39,7 @@ const Header = (props: Props) => {
             <div className="relative flex justify-between lg:gap-8 xl:grid xl:grid-cols-12">
               <div className="flex md:absolute md:inset-y-0 md:left-0 lg:static xl:col-span-2">
                 <div className="flex flex-shrink-0 items-center">
-                  <Link href="/">
+                  <Link href="/dashboard">
                     <MagnifyingGlassIcon
                       className="h-7 w-7 text-gray-400"
                       aria-hidden="true"
