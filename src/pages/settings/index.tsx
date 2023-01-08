@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import AuthLayout from "../../components/AuthLayout";
-import { getSession, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { trpc } from "../../utils/trpc";
 
 type UserData = {
@@ -181,20 +181,3 @@ export default function Settings() {
 Settings.getLayout = function getLayout(page: ReactElement) {
   return <AuthLayout>{page}</AuthLayout>;
 };
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
-}
