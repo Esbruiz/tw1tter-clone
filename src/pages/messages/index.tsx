@@ -5,6 +5,7 @@ import UserDMModal from "../../components/reusable/UserDMModal";
 import type { RouterOutputs } from "../../utils/trpc";
 import { trpc } from "../../utils/trpc";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -34,6 +35,14 @@ const Messages = () => {
   }, [refetch]);
 
   const { data: session } = useSession();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!session) {
+      router.push("/login");
+    }
+  }, [session, router]);
 
   useEffect(() => {
     if (selectedUser) {

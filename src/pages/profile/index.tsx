@@ -2,7 +2,7 @@ import { WrenchIcon } from "@heroicons/react/20/solid";
 
 import { trpc } from "../../utils/trpc";
 import type { ReactElement } from "react";
-import React from "react";
+import React, { useEffect } from "react";
 import AuthLayout from "../../components/AuthLayout";
 import { useSession } from "next-auth/react";
 import Tweet from "../../components/reusable/Tweet";
@@ -15,6 +15,12 @@ const Profile = () => {
   const { data: tweets } = trpc.tweets.getUserTweets.useQuery({
     id: session?.user?.id as string,
   });
+
+  useEffect(() => {
+    if (!session) {
+      router.push("/login");
+    }
+  }, [session, router]);
 
   const navigateToSettings = () => {
     router.push("/settings");

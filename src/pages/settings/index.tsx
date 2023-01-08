@@ -1,7 +1,9 @@
 import type { ReactElement } from "react";
+import { useEffect } from "react";
 import AuthLayout from "../../components/AuthLayout";
 import { useSession } from "next-auth/react";
 import { trpc } from "../../utils/trpc";
+import { useRouter } from "next/navigation";
 
 type UserData = {
   userData: {
@@ -15,6 +17,7 @@ type UserData = {
 
 export default function Settings() {
   const { data: session } = useSession();
+  const router = useRouter();
   const updateProfile = trpc.user.update.useMutation();
 
   const saveData = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -26,6 +29,12 @@ export default function Settings() {
     } as UserData;
     updateProfile.mutate(data);
   };
+
+  useEffect(() => {
+    if (!session) {
+      router.push("/login");
+    }
+  }, [session, router]);
 
   return (
     <>
