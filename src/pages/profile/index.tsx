@@ -63,7 +63,7 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-4 hidden min-w-0 flex-1 sm:block 2xl:hidden">
+              <div className="mt-4 hidden min-w-0 flex-1 sm:block">
                 <h1 className="truncate text-2xl font-bold text-gray-900">
                   {session?.user?.name}
                 </h1>
